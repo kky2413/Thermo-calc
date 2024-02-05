@@ -1,0 +1,172 @@
+
+$ Database file written 2016- 2- 8
+$ From database: User data 2016.02.08    
+ ELEMENT /-   ELECTRON_GAS              0.0000E+00  0.0000E+00  0.0000E+00!
+ ELEMENT VA   VACUUM                    0.0000E+00  0.0000E+00  0.0000E+00!
+ ELEMENT C    GRAPHITE                  1.2011E+01  1.0540E+03  5.7423E+00!
+ ELEMENT FE   BCC_A2                    5.5847E+01  4.4890E+03  2.7280E+01!
+ ELEMENT N    1/2_MOLE_N2(G)            1.4007E+01  4.3350E+03  9.5751E+01!
+ 
+ SPECIES N2                          N2!
+
+
+ FUNCTION GHSERCC   298.15 -17368.441+170.73*T-24.3*T*LN(T)-4.723E-04*T**2
+     +2562600*T**(-1)-2.643E+08*T**(-2)+1.2E+10*T**(-3); 6000 N !
+ FUNCTION GDIACC    298.15 -16359.441+175.61*T-24.31*T*LN(T)-4.723E-04*T**2
+     +2698000*T**(-1)-2.61E+08*T**(-2)+1.11E+10*T**(-3); 6000 N !
+ FUNCTION GHSERFE   298.15 +1225.7+124.134*T-23.5143*T*LN(T)-.00439752*T**2
+     -5.8927E-08*T**3+77359*T**(-1); 1811 Y
+      -25383.581+299.31255*T-46*T*LN(T)+2.29603E+31*T**(-9); 6000 N !
+ FUNCTION GFCCFE    298.15 -1462.4+8.282*T-1.15*T*LN(T)+6.4E-04*T**2
+     +GHSERFE#; 1811 Y
+      -1713.815+.940009*T+GHSERFE#+4.9251E+30*T**(-9); 6000 N !
+ FUNCTION GHCPFE    298.15 -3705.78+12.591*T-1.15*T*LN(T)+6.4E-04*T**2
+     +GHSERFE#; 1811 Y
+      -3957.195+5.249009*T+GHSERFE#+4.9251E+30*T**(-9); 6000 N !
+ FUNCTION GLIQFE    298.15 +12040.17-6.55843*T+GHSERFE#-3.67516E-21*T**7; 
+     1811 Y
+      -10838.83+291.302*T-46*T*LN(T); 6000 N !
+ FUNCTION GHSERNN   298.15 -3750.675-9.45425*T-12.7819*T*LN(T)
+     -.00176686*T**2+2.681E-09*T**3-32374*T**(-1); 950 Y
+      -7358.85+17.2003*T-16.3699*T*LN(T)-6.5107E-04*T**2+3.0097E-08*T**3
+     +563070*T**(-1); 3350 Y
+      -16392.8+50.26*T-20.4695*T*LN(T)+2.39754E-04*T**2-8.333E-09*T**3
+     +4596375*T**(-1); 6000 N !
+ FUNCTION UN_ASS    298.15 +0.0; 300 N !
+ 
+ TYPE_DEFINITION % SEQ *!
+ DEFINE_SYSTEM_DEFAULT ELEMENT 2 !
+ DEFAULT_COMMAND DEF_SYS_ELEMENT VA /- !
+
+
+ PHASE LIQUID:L %  1  1.0  !
+ CONSTITUENT LIQUID:L :C,FE,N :  !
+
+ PARAMETER G(LIQUID,C;0),,                 +GHSERCC#+117369-24.63*T;,, N 86Gus !
+ PARAMETER G(LIQUID,FE;0),,                                +GLIQFE#;,, N 85Gui !
+ PARAMETER G(LIQUID,N;0),,                  +GHSERNN#+29950+59.02*T;,, N 91Fri !
+ 
+ PARAMETER G(LIQUID,C,FE;0),,                        -124320+28.5*T;,, N 85Gus !
+ PARAMETER G(LIQUID,C,FE;1),,                                +19300;,, N 85Gus !
+ PARAMETER G(LIQUID,C,FE;2),,                           +49260-19*T;,, N 85Gus !
+ PARAMETER G(LIQUID,FE,N;0),,                        -19930-12.01*T;,, N 91Fri !
+ PARAMETER G(LIQUID,C,FE,N;0),,                   +490996-109.135*T;,, N  91Du !
+ PARAMETER G(LIQUID,C,FE,N;1),,                   +192167-109.135*T;,, N  91Du !
+ PARAMETER G(LIQUID,C,FE,N;2),,                   +490996-109.135*T;,, N  91Du !
+
+
+
+ TYPE_DEFINITION & GES A_P_D BCC_A2 MAGNETIC  -1.0 0.4 !
+ PHASE BCC_A2  %&  2 1   3 !
+ CONSTITUENT BCC_A2  :FE : C,N,VA :  !
+ 
+ PARAMETER G(BCC_A2,FE:VA;0),,                            +GHSERFE#;,, N 79Agr !
+ PARAMETER TC(BCC_A2,FE:VA;0),,                               +1043;,, N 79Agr !
+ PARAMETER BMAGN(BCC_A2,FE:VA;0),,                            +2.22;,, N 79Agr !
+ 
+ PARAMETER G(BCC_A2,FE:C;0),,  +GHSERFE#+3*GHSERCC#+322050+75.667*T;,, N 85Gus !
+ PARAMETER TC(BCC_A2,FE:C;0),,                                +1043;,, N 85Gus !
+ PARAMETER BMAGN(BCC_A2,FE:C;0),,                             +2.22;,, N 85Gus !
+ PARAMETER G(BCC_A2,FE:C,VA;0),,                             -190*T;,, N 85Gus !
+ 
+ PARAMETER G(BCC_A2,FE:N;0),,   +GHSERFE#+3*GHSERNN#+93562+165.07*T;,, N 91Fri ! 
+ PARAMETER TC(BCC_A2,FE:N;0),,                                +1043;,, N 91Fri !
+ PARAMETER BMAGN(BCC_A2,FE:N;0),,                             +2.22;,, N 91Fri !
+
+
+
+
+
+ TYPE_DEFINITION ' GES A_P_D CEMENTITE_D011 MAGNETIC  -3.0 0.28 !
+ PHASE CEMENTITE_D011  %'  2 3   1 !
+ CONSTITUENT CEMENTITE_D011  :FE : C,VA :  !
+
+ PARAMETER G(CEMENTITE_D011,FE:C;0),, 
+         -8983+658.38*T-113.578*T*LN(T)-.003059*T**2+610500*T**(-1);,, N 16Goe !
+ PARAMETER TC(CEMENTITE_D011,FE:C;0),,                         +485;,, N 10Hal !
+ PARAMETER BMAGN(CEMENTITE_D011,FE:C;0),,                     +1.51;,, N 16Goe !
+ 
+ PARAMETER G(CEMENTITE_D011,FE:VA;0),,    +3*GHSERFE#+44782-11.59*T;,, N 16Goe !
+ PARAMETER TC(CEMENTITE_D011,FE:VA;0),,                        +485;,, N 16Goe !
+ PARAMETER BMAGN(CEMENTITE_D011,FE:VA;0),,                    +1.51;,, N 16Goe !
+
+
+ PHASE DIAMOND_A4  %  1  1.0  !
+ CONSTITUENT DIAMOND_A4  :C :  !
+
+ PARAMETER G(DIAMOND_A4,C;0),,                             +GDIACC#;,, N 86Gus !
+
+
+ TYPE_DEFINITION ( GES A_P_D FCC_A1 MAGNETIC  -3.0    2.80000E-01 !
+ PHASE FCC_A1  %(  2 1   1 !
+ CONSTITUENT FCC_A1  :FE : C,N,VA :  !
+
+ PARAMETER G(FCC_A1,FE:VA;0),,                             +GFCCFE#;,, N 79Agr !
+ PARAMETER TC(FCC_A1,FE:VA;0),,                                -201;,, N 82Her !
+ PARAMETER BMAGN(FCC_A1,FE:VA;0),,                             -2.1;,, N 82Her !
+ 
+ PARAMETER G(FCC_A1,FE:C;0),,      +GFCCFE#+GHSERCC#+77207-15.877*T;,, N 85Gus !
+ PARAMETER TC(FCC_A1,FE:C;0),,                                 -201;,, N 85Gus !
+ PARAMETER BMAGN(FCC_A1,FE:C;0),,                              -2.1;,, N 85Gus !
+ 
+ PARAMETER G(FCC_A1,FE:N;0),,
+                +GHSERFE#+GHSERNN#-20277+245.3931*T-21.2984*T*LN(T);,, N 93Du  !
+
+ PARAMETER G(FCC_A1,FE:C,VA;0),,                             -34671;,, N 85Gus !
+ PARAMETER G(FCC_A1,FE:N,VA;0),,                             -26150;,, N 75Hil !
+ PARAMETER G(FCC_A1,FE:C,N;0),,                               +8218;,, N NEW   !
+
+
+
+ PHASE FE4N_L1  %  2 4   1 !
+ CONSTITUENT FE4N_L1  :FE : C,N,VA :  !
+
+ PARAMETER G(FE4N_L1,FE:VA;0),,           +4*GHSERFE#+12066+3.691*T;,, N NEW   !
+ PARAMETER G(FE4N_L1,FE:C;0),,           +4*GHSERFE#+GHSERCC#+20000;,, N NEW   !
+ PARAMETER G(FE4N_L1,FE:N;0),,  +4*GHSERFE#+GHSERNN#-37744+72.786*T;,, N NEW   !
+
+
+ PHASE GRAPHITE  %  1  1.0  !
+ CONSTITUENT GRAPHITE  :C :  !
+
+ PARAMETER G(GRAPHITE,C;0),,                              +GHSERCC#;,, N 86Gus !
+
+
+ PHASE HCP_A3  %  2 1   .5 !
+ CONSTITUENT HCP_A3  :FE : C,N,VA :  !
+ 
+ PARAMETER G(HCP_A3,FE:VA;0),,                             +GHCPFE#;,, N 85Gui !
+ PARAMETER G(HCP_A3,FE:C;0),,  +GFCCFE#+.5*GHSERCC#+52905-11.9075*T;,, N 88And !
+ PARAMETER G(HCP_A3,FE:N;0),, +GHSERFE#+.5*GHSERNN#-13863+40.2123*T;,, N 93Du  !
+   
+ PARAMETER G(HCP_A3,FE:C,VA;0),,                             -53059;,, N NEW   !
+ PARAMETER G(HCP_A3,FE:C,VA;1),,                             -38756;,, N NEW   !
+ PARAMETER G(HCP_A3,FE:N,VA;0),,                     +8186-18.127*T;,, N NEW   !
+ PARAMETER G(HCP_A3,FE:N,VA;1),,                    -24378+24.959*T;,, N NEW   ! 
+ PARAMETER G(HCP_A3,FE:C,N;0),,                     -20772-32.504*T;,, N NEW   !
+ PARAMETER G(HCP_A3,FE:C,N;1),,                              -28839;,, N NEW   !
+
+ PHASE N2GAS  %  1  1.0  !
+ CONSTITUENT N2GAS  :N2 :  !
+
+ PARAMETER G(N2GAS,N2;0),,                       +2*GHSERNN#+RTLNP#;,, N 87Fri !
+
+ LIST_OF_REFERENCES
+ NUMBER  SOURCE
+ NEW   'New parameter from this work'
+ 75Hil 'M. Hillert, M. Jarl, Metall. Trans. A 6A (1975) 553-559'
+ 79Agr 'J. Agren, Metall. Trans. A 10A (1979) 1847-1852'
+ 82Her 'S. Hertzman, B. Sundman, CALPHAD 6 (1982) 67-80'
+ 85Gui 'A. Fernandez Guillermet, P. Gustafson, High Temp. -
+                               High Pressures 16 (1985) 591-610'
+ 85Gus 'P. Gustafson, Scand. J. Metall. 14 (1985) 259-267'
+ 86Gus 'P. Gustafson, Carbon 24 (1986) 169-176'
+ 87Fri 'K. Frisk, CALPHAD 11 (1987) 127-134'
+ 88And 'J.-O. Andersson, CALPHAD 12 (1988) 9-23'
+ 91Du  'H. Du, M. Hillert, Z. Metallkd. 82 (1991) 310-316'
+ 93Du  'H. Du, J. Phase Equilib. 14 (1993) 682-693'
+ 91Fri 'K. Frisk, CALPHAD 15 (1991) 79-106'
+ 10Hal 'B. Hallstedt et al., CALPHAD 34 (2010) 129-133'
+ 16Goe 'H. Goehring et al., CALPHAD 52 (2016) 38-46'
+  ! 
+ 
